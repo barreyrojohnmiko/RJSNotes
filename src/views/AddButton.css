@@ -1,0 +1,16 @@
+.add-button-container {
+  height: 60px;
+  width: 60px;
+  border-radius: 30px;
+  border: none;
+  background: #6f6fc8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-button-logo {
+  height: 20px;
+  width: 20px;
+  color: white;
+}
