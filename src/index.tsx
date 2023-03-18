@@ -10,9 +10,9 @@ import "./index.css";
 
 ReactDOM.render(
   <Provider store={Store}>
-    <BrowserRouter>
+    <HashRouter>
       <App />
-    </BrowserRouter>
+    </HashRouter>
   </Provider>,
   document.getElementById("root")
 );
