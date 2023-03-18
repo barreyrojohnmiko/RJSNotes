@@ -21,6 +21,30 @@ const Note = () => {
         <NotePanel />
         <NotePanel />
       </div>
+      <div className="note-flex-container">
+        <NotePanel />
+        <NotePanel />
+      </div>
+      <div className="note-flex-container">
+        <NotePanel />
+        <NotePanel />
+      </div>
+      <div className="note-flex-container">
+        <NotePanel />
+        <NotePanel />
+      </div>
+      <div className="note-flex-container">
+        <NotePanel />
+        <NotePanel />
+      </div>
+      <div className="note-flex-container">
+        <NotePanel />
+        <NotePanel />
+      </div>
+      <div className="note-flex-container">
+        <NotePanel />
+        <NotePanel />
+      </div>
     </div>
   );
 };
