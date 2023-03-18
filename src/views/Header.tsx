@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import { useEffect } from "react";
 import "./Header.css";
 
 import { faMagnifyingGlass, faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { useDispatch, useSelector } from "react-redux";
-import { setIsSearchTextCleared, setSearchText, setIsHeaderVisible, setPrevScrollPos } from "../redux/views/Header/action";
+import { setIsHeaderVisible, setIsSearchTextCleared, setPrevScrollPos, setSearchText } from "../redux/views/Header/action";
 
 const Header = () => {
   const dispatch: any = useDispatch();

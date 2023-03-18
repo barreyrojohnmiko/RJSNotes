@@ -1,7 +1,7 @@
-import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
 
+import AddNote from "./components/AddNote";
 import Home from "./components/Home";
 
 const App = () => {
@@ -10,6 +10,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/add-note" element={<AddNote />} />
       </Routes>
     </div>
   );
