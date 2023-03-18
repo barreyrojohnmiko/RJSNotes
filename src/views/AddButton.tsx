@@ -1,8 +1,7 @@
-import React from "react";
 import "./AddButton.css";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileCirclePlus } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const AddButton = () => {
   return (
