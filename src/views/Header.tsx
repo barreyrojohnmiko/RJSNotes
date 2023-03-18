@@ -5,11 +5,11 @@ import { faMagnifyingGlass, faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { useDispatch, useSelector } from "react-redux";
-import { setIsSearchTextCleared, setSearchText } from "../redux/views/Header/action";
+import { setIsSearchTextCleared, setSearchText, setIsHeaderVisible, setPrevScrollPos } from "../redux/views/Header/action";
 
 const Header = () => {
   const dispatch: any = useDispatch();
-  const { searchText, isSearchTextCleared } = useSelector((state: any) => state.headerReducers);
+  const { searchText, isSearchTextCleared, isHeaderVisible, prevScrollPos } = useSelector((state: any) => state.headerReducers);
 
   const handleSearchTextChange = (event: any) => {
     dispatch(setSearchText(event.target.value));
@@ -29,14 +29,11 @@ const Header = () => {
   }, [searchText, dispatch]);
 
   // Header reactive on scroll
-  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
-  const [prevScrollPos, setPrevScrollPos] = useState(0);
-
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollPos = window.pageYOffset;
-      setIsHeaderVisible(prevScrollPos > currentScrollPos || currentScrollPos < 10);
-      setPrevScrollPos(currentScrollPos);
+      dispatch(setIsHeaderVisible(prevScrollPos > currentScrollPos || currentScrollPos < 10));
+      dispatch(setPrevScrollPos(currentScrollPos));
     };
 
     window.addEventListener("scroll", handleScroll);
