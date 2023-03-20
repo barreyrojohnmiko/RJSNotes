@@ -1,4 +1,5 @@
-import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./AddNote.css";
 
 import { faArrowLeftLong, faCheck } from "@fortawesome/free-solid-svg-icons";
@@ -8,8 +9,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   setContentText,
   setTitleText,
-  setTimestamp,
-  setCharactersCount,
 } from "../redux/components/AddNote/action";
 
 const AddNote = () => {
@@ -19,14 +18,14 @@ const AddNote = () => {
   );
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const storedData = location.state?.storedData;
 
   const handleGoHome = () => {
     dispatch(setTitleText(""));
     dispatch(setContentText(""));
     navigate("/");
   };
-
-  const doSaveProgress = () => {};
 
   const handleTitleTextChange = (event: any) => {
     dispatch(setTitleText(event.target.value));
@@ -35,6 +34,28 @@ const AddNote = () => {
   const handleContentextChange = (event: any) => {
     dispatch(setContentText(event.target.value));
   };
+
+  // Load the data from local storage or from the location state
+  useEffect(() => {
+    const storedTitleText =
+      storedData?.titleText || localStorage.getItem("titleText");
+    const storedContentText =
+      storedData?.contentText || localStorage.getItem("contentText");
+
+    if (storedTitleText) {
+      dispatch(setTitleText(storedTitleText));
+    }
+
+    if (storedContentText) {
+      dispatch(setContentText(storedContentText));
+    }
+  }, []);
+
+  // Update local storage whenever the data changes
+  useEffect(() => {
+    localStorage.setItem("titleText", titleText);
+    localStorage.setItem("contentText", contentText);
+  }, [titleText, contentText]);
 
   return (
     <div className="add-note-main-container">
@@ -47,10 +68,7 @@ const AddNote = () => {
             />
           </button>
           {titleText !== "" || contentText !== "" ? (
-            <button
-              className="header-button-container"
-              onClick={doSaveProgress}
-            >
+            <button className="header-button-container">
               <FontAwesomeIcon icon={faCheck} className="header-button-logo" />
             </button>
           ) : null}
