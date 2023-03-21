@@ -2,15 +2,12 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./AddNote.css";
 
-import { faArrowLeftLong, faCheck } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import { useDispatch, useSelector } from "react-redux";
 import {
-  setTitleText,
+  setCharactersCount,
   setContentText,
   setTimestamp,
-  setCharactersCount,
+  setTitleText,
 } from "../redux/components/AddNote/action";
 
 import NoteEditor from "../views/NoteEditor";
