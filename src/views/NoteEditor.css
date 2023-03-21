@@ -1,0 +1,86 @@
+.note-editor-header {
+    width: 100%;
+    position: fixed;
+  }
+  
+  .note-editor-content-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background: #0a1930;
+    padding: 20px 25px 20px 25px;
+  }
+  
+  .header-button-container {
+    border: none;
+    background: transparent;
+  }
+  
+  .header-button-logo {
+    height: 20px;
+    width: 20px;
+    color: #ccd6f6;
+  }
+  
+  .note-editor-body {
+    padding: 60px 25px 0 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .note-editor-details-font {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 12px;
+    color: rgba(204, 214, 246, 0.3);
+  }
+  
+  .note-editor-title-font-settings {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+  }
+  
+  .note-editor-title-font-settings::placeholder {
+    color: rgba(204, 214, 246, 0.5);
+  }
+  
+  .note-editor-title-font-settings:focus {
+    outline: none;
+    color: #ccd6f6;
+  }
+  
+  .note-editor-title-font-settings:not(:focus) {
+    outline: none;
+    color: #ccd6f6;
+  }
+  
+  .note-editor-content-font-settings {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+  }
+  
+  .note-editor-content-font-settings::placeholder {
+    color: rgba(204, 214, 246, 0.5);
+  }
+  
+  .note-editor-content-font-settings:focus {
+    outline: none;
+    color: #ccd6f6;
+  }
+  
+  .note-editor-content-font-settings:not(:focus) {
+    outline: none;
+    color: #ccd6f6;
+  }
+  
+  .note-editor-text-field {
+    background: none;
+    border: none;
+  }
+  

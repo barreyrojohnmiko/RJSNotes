@@ -9,7 +9,7 @@ const Note = () => {
   const storedData = storedDataString ? JSON.parse(storedDataString) : null;
 
   const doOpenEditor = (data: any) => {
-    navigate("add-note", { state: { storedData: data } });
+    navigate("edit-note", { state: { storedData: data } });
   };
 
   return (
