@@ -36,21 +36,32 @@ const AddNote = () => {
     dispatch(setCharactersCount(event.target.value.length));
   };
 
-  const handleSave = () => {
-    const allNotesData = [
-      ...JSON.parse(localStorage.getItem("allNotesData") || "[]"),
-      { titleText, contentText, GUID: timestamp },
-    ];
-    localStorage.setItem("allNotesData", JSON.stringify(allNotesData));
-    navigate("/");
-  };
-
   const formatDate = (timestamp: string) => {
     const date = new Date(timestamp);
     const day = date.toLocaleDateString("en-GB", { day: "2-digit" });
     const month = date.toLocaleDateString("en-GB", { month: "2-digit" });
     const year = date.toLocaleDateString("en-GB", { year: "numeric" });
     return `${day}/${month}/${year}`;
+  };
+
+  const handleSave = () => {
+    const allNotesDataString = localStorage.getItem("allNotesData");
+    const allNotesData = allNotesDataString ? JSON.parse(allNotesDataString) : [];
+  
+    const newNoteData = { titleText, contentText, GUID: timestamp };
+    const existingNoteIndex = allNotesData.findIndex(
+      (note: any) => note.GUID === timestamp
+    );
+    if (existingNoteIndex === -1) {
+      allNotesData.push(newNoteData);
+    } else {
+      allNotesData[existingNoteIndex] = newNoteData;
+    }
+  
+    localStorage.setItem("allNotesData", JSON.stringify(allNotesData));
+    localStorage.setItem("titleText", "");
+    localStorage.setItem("contentText", "");
+    navigate("/");
   };
 
   // Set the timestamp if it doesn't exist, and store the object of the data inside the array
@@ -64,18 +75,8 @@ const AddNote = () => {
         dispatch(setTimestamp(newTimestamp));
       }
     }
-
-    const allNotesDataString = localStorage.getItem("allNotesData");
-    const allNotesData = allNotesDataString
-      ? JSON.parse(allNotesDataString)
-      : [];
-    const newNoteData = { titleText, contentText, GUID: timestamp };
-    allNotesData.push(newNoteData);
-
-    localStorage.setItem("allNotesData", JSON.stringify(allNotesData));
-    localStorage.setItem("titleText", titleText);
-    localStorage.setItem("contentText", contentText);
-  }, [timestamp, dispatch, titleText, contentText]);
+  }, [timestamp, dispatch]);
+  
 
   return (
     <div className="add-note-main-container">
