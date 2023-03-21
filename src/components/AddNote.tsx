@@ -38,6 +38,15 @@ const AddNote = () => {
     dispatch(setCharactersCount(event.target.value.length));
   };
 
+  const handleSave = () => {
+    const allNotesData = [
+      ...JSON.parse(localStorage.getItem("allNotesData") || "[]"),
+      { titleText, contentText, GUID: timestamp },
+    ];
+    localStorage.setItem("allNotesData", JSON.stringify(allNotesData));
+    navigate("/");
+  };
+
   const formatDate = (timestamp: string) => {
     const date = new Date(timestamp);
     const day = date.toLocaleDateString("en-GB", { day: "2-digit" });
@@ -45,22 +54,6 @@ const AddNote = () => {
     const year = date.toLocaleDateString("en-GB", { year: "numeric" });
     return `${day}/${month}/${year}`;
   };
-
-  // Load the data from local storage or from the location state
-  useEffect(() => {
-    const storedTitleText =
-      storedData?.titleText || localStorage.getItem("titleText");
-    const storedContentText =
-      storedData?.contentText || localStorage.getItem("contentText");
-
-    if (storedTitleText) {
-      dispatch(setTitleText(storedTitleText));
-    }
-
-    if (storedContentText) {
-      dispatch(setContentText(storedContentText));
-    }
-  }, []);
 
   // Set the timestamp if it doesn't exist, and store the object of the data inside the array
   useEffect(() => {
@@ -74,7 +67,13 @@ const AddNote = () => {
       }
     }
 
-    const allNotesData = { titleText, contentText, GUID: timestamp };
+    const allNotesDataString = localStorage.getItem("allNotesData");
+    const allNotesData = allNotesDataString
+      ? JSON.parse(allNotesDataString)
+      : [];
+    const newNoteData = { titleText, contentText, GUID: timestamp };
+    allNotesData.push(newNoteData);
+
     localStorage.setItem("allNotesData", JSON.stringify(allNotesData));
     localStorage.setItem("titleText", titleText);
     localStorage.setItem("contentText", contentText);
@@ -91,7 +90,7 @@ const AddNote = () => {
             />
           </button>
           {titleText !== "" || contentText !== "" ? (
-            <button className="header-button-container">
+            <button className="header-button-container" onClick={handleSave}>
               <FontAwesomeIcon icon={faCheck} className="header-button-logo" />
             </button>
           ) : null}
