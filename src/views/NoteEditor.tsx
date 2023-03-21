@@ -3,7 +3,7 @@ import "./NoteEditor.css";
 import { faArrowLeftLong, faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import NoteEditorObject from "../objects/interface/NoteEditorObject";
+import AddNoteObject from "../objects/interface/AddNoteObject";
 
 const formatDate = (timestamp: string) => {
     const date = new Date(timestamp);
@@ -13,7 +13,7 @@ const formatDate = (timestamp: string) => {
     return `${day}/${month}/${year}`;
   };
 
-const NoteEditor = (props: NoteEditorObject) => {
+const NoteEditor = (props: AddNoteObject) => {
   return (
     <div className="note-editor-main-container">
       <div className="note-editor-header">

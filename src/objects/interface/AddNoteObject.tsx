@@ -1,4 +1,4 @@
-interface NoteEditorObject {
+interface AddNoteObject {
   titleText: string;
   contentText: string;
   timestamp: string;
@@ -9,4 +9,4 @@ interface NoteEditorObject {
   handleContentextChange: (event: any) => void,
 }
 
-export default NoteEditorObject;
+export default AddNoteObject;
