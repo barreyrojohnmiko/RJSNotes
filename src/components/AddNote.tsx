@@ -76,6 +76,8 @@ const AddNote = () => {
 
     const allNotesData = { titleText, contentText, GUID: timestamp };
     localStorage.setItem("allNotesData", JSON.stringify(allNotesData));
+    localStorage.setItem("titleText", titleText);
+    localStorage.setItem("contentText", contentText);
   }, [timestamp, dispatch, titleText, contentText]);
 
   return (
