@@ -7,9 +7,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
-  setCharactersCount,
-  setContentText,
   setTitleText,
+  setContentText,
+  setTimestamp,
+  setCharactersCount,
 } from "../redux/components/AddNote/action";
 
 const AddNote = () => {
@@ -53,6 +54,28 @@ const AddNote = () => {
     }
   }, []);
 
+  // Set the timestamp if it doesn't exist
+  useEffect(() => {
+    if (!timestamp) {
+      const storedTimestamp = localStorage.getItem("GUID");
+      if (storedTimestamp) {
+        dispatch(setTimestamp(storedTimestamp));
+      } else {
+        const newTimestamp = new Date().toISOString();
+        dispatch(setTimestamp(newTimestamp));
+        localStorage.setItem("GUID", newTimestamp);
+      }
+    }
+  }, [timestamp, dispatch]);
+
+  const formatDate = (timestamp: any) => {
+    const date = new Date(timestamp);
+    const day = date.toLocaleDateString("en-GB", { day: "2-digit" });
+    const month = date.toLocaleDateString("en-GB", { month: "2-digit" });
+    const year = date.toLocaleDateString("en-GB", { year: "numeric" });
+    return `${day}/${month}/${year}`;
+  };
+
   // Update local storage whenever the data changes
   useEffect(() => {
     localStorage.setItem("titleText", titleText);
@@ -78,7 +101,9 @@ const AddNote = () => {
       </div>
 
       <div className="add-note-body">
-        <div className="add-note-details-font"> {timestamp} | {charactersCount} characters </div>
+        <div className="add-note-details-font">
+          Date Created: {formatDate(timestamp)} | {charactersCount} characters
+        </div>
         <input
           type="text"
           className="add-note-title-font-settings add-note-text-field"

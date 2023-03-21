@@ -8,8 +8,8 @@ import {
 const initialState = {
   titleText: "",
   contentText: "",
-  timestamp: "Feb 03, 2023",
-  charactersCount: "143",
+  timestamp: null,
+  charactersCount: 0,
 };
 
 const addNoteReducers = (state = initialState, action) => {
