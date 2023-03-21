@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
+  setCharactersCount,
   setContentText,
   setTitleText,
 } from "../redux/components/AddNote/action";
@@ -33,6 +34,7 @@ const AddNote = () => {
 
   const handleContentextChange = (event: any) => {
     dispatch(setContentText(event.target.value));
+    dispatch(setCharactersCount(event.target.value.length));
   };
 
   // Load the data from local storage or from the location state
