@@ -8,16 +8,19 @@ const Note = () => {
   const storedDataString = localStorage.getItem("allNotesData");
   const storedData = storedDataString ? JSON.parse(storedDataString) : null;
 
-  const doOpenEditor = (storedData: any) => {
-    navigate("add-note", { state: { storedData } });
+  const doOpenEditor = (data: any) => {
+    navigate("add-note", { state: { data } });
   };
 
   return (
     <div className="note-main-container">
       <div className="note-flex-container">
-        <div onClick={() => doOpenEditor({})}>
-          <NotePanel storedData={storedData} />
-        </div>
+        {storedData &&
+          storedData.map((data: any, index: number) => (
+            <div key={index} onClick={() => doOpenEditor(data)}>
+              <NotePanel storedData={data} />
+            </div>
+          ))}
       </div>
     </div>
   );
