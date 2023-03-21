@@ -24,6 +24,8 @@ const AddNote = () => {
   const handleGoHome = () => {
     dispatch(setTitleText(""));
     dispatch(setContentText(""));
+    localStorage.removeItem("titleText");
+    localStorage.removeItem("contentText");
     navigate("/");
   };
 
@@ -46,21 +48,16 @@ const AddNote = () => {
 
   const handleSave = () => {
     const allNotesDataString = localStorage.getItem("allNotesData");
-    const allNotesData = allNotesDataString ? JSON.parse(allNotesDataString) : [];
-  
+    const allNotesData = allNotesDataString
+      ? JSON.parse(allNotesDataString)
+      : [];
     const newNoteData = { titleText, contentText, GUID: timestamp };
-    const existingNoteIndex = allNotesData.findIndex(
-      (note: any) => note.GUID === timestamp
-    );
-    if (existingNoteIndex === -1) {
-      allNotesData.push(newNoteData);
-    } else {
-      allNotesData[existingNoteIndex] = newNoteData;
-    }
-  
+    allNotesData.push(newNoteData);
     localStorage.setItem("allNotesData", JSON.stringify(allNotesData));
-    localStorage.setItem("titleText", "");
-    localStorage.setItem("contentText", "");
+    dispatch(setTitleText(""));
+    dispatch(setContentText(""));
+    dispatch(setTimestamp(""));
+    dispatch(setCharactersCount(0));
     navigate("/");
   };
 
@@ -76,7 +73,6 @@ const AddNote = () => {
       }
     }
   }, [timestamp, dispatch]);
-  
 
   return (
     <div className="add-note-main-container">
