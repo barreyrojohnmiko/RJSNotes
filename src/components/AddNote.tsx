@@ -38,6 +38,14 @@ const AddNote = () => {
     dispatch(setCharactersCount(event.target.value.length));
   };
 
+  const formatDate = (timestamp: string) => {
+    const date = new Date(timestamp);
+    const day = date.toLocaleDateString("en-GB", { day: "2-digit" });
+    const month = date.toLocaleDateString("en-GB", { month: "2-digit" });
+    const year = date.toLocaleDateString("en-GB", { year: "numeric" });
+    return `${day}/${month}/${year}`;
+  };
+
   // Load the data from local storage or from the location state
   useEffect(() => {
     const storedTitleText =
@@ -54,7 +62,7 @@ const AddNote = () => {
     }
   }, []);
 
-  // Set the timestamp if it doesn't exist
+  // Set the timestamp if it doesn't exist, and store the object of the data inside the array
   useEffect(() => {
     if (!timestamp) {
       const storedTimestamp = localStorage.getItem("GUID");
@@ -63,24 +71,12 @@ const AddNote = () => {
       } else {
         const newTimestamp = new Date().toISOString();
         dispatch(setTimestamp(newTimestamp));
-        localStorage.setItem("GUID", newTimestamp);
       }
     }
-  }, [timestamp, dispatch]);
 
-  const formatDate = (timestamp: any) => {
-    const date = new Date(timestamp);
-    const day = date.toLocaleDateString("en-GB", { day: "2-digit" });
-    const month = date.toLocaleDateString("en-GB", { month: "2-digit" });
-    const year = date.toLocaleDateString("en-GB", { year: "numeric" });
-    return `${day}/${month}/${year}`;
-  };
-
-  // Update local storage whenever the data changes
-  useEffect(() => {
-    localStorage.setItem("titleText", titleText);
-    localStorage.setItem("contentText", contentText);
-  }, [titleText, contentText]);
+    const allNotesData = { titleText, contentText, GUID: timestamp };
+    localStorage.setItem("allNotesData", JSON.stringify(allNotesData));
+  }, [timestamp, dispatch, titleText, contentText]);
 
   return (
     <div className="add-note-main-container">
