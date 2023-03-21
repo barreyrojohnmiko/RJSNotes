@@ -1,8 +1,7 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import "./EditNote.css";
+import { useNavigate, useLocation } from "react-router-dom";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   setCharactersCount,
   setContentText,
@@ -14,11 +13,10 @@ import NoteEditor from "../views/NoteEditor";
 
 const EditNote = () => {
   const dispatch: any = useDispatch();
-  const { titleText, contentText, timestamp, charactersCount } = useSelector(
-    (state: any) => state.addNoteReducers
-  );
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const storedData = location.state.storedData;
 
   const handleGoHome = () => {
     dispatch(setTitleText(""));
@@ -44,11 +42,18 @@ const EditNote = () => {
   };
 
   const editNoteData = {
-    titleText: titleText,
-    contentText: contentText,
-    timestamp: timestamp,
-    charactersCount: charactersCount,
+    titleText: storedData.titleText,
+    contentText: storedData.contentText,
+    timestamp: storedData.timestamp,
+    charactersCount: storedData.charactersCount,
   };
+
+  useEffect(() => {
+    console.log(storedData.titleText);
+    console.log(storedData.contentText);
+    console.log(storedData.timestamp?.toString());
+    console.log(storedData.charactersCount);
+  }, [storedData.titleText, storedData.contentText, storedData.timestamp, storedData.charactersCount])
 
   return (
     <>
