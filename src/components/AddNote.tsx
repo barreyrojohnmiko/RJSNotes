@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./AddNote.css";
 
 import { faArrowLeftLong, faCheck } from "@fortawesome/free-solid-svg-icons";
@@ -20,8 +20,6 @@ const AddNote = () => {
   );
 
   const navigate = useNavigate();
-  const location = useLocation();
-  const storedData = location.state?.storedData;
 
   const handleGoHome = () => {
     dispatch(setTitleText(""));
