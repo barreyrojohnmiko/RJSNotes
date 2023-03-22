@@ -22,8 +22,12 @@ const AddNote = () => {
   const handleGoHome = () => {
     dispatch(setTitleText(""));
     dispatch(setContentText(""));
+    dispatch(setTimestamp(""));
+    dispatch(setCharactersCount(0));
     localStorage.removeItem("titleText");
     localStorage.removeItem("contentText");
+    localStorage.removeItem("GUID");
+    localStorage.removeItem("charactersCount");
     navigate("/");
   };
 
@@ -32,8 +36,9 @@ const AddNote = () => {
   };
 
   const handleContentextChange = (event: any) => {
+    const charactersCountWithoutSpaces = event.target.value.replace(/\s+/g, "");
     dispatch(setContentText(event.target.value));
-    dispatch(setCharactersCount(event.target.value.length));
+    dispatch(setCharactersCount(charactersCountWithoutSpaces.length));
   };
 
   const handleSave = () => {
@@ -41,7 +46,12 @@ const AddNote = () => {
     const allNotesData = allNotesDataString
       ? JSON.parse(allNotesDataString)
       : [];
-    const newNoteData = { titleText, contentText, GUID: timestamp };
+    const newNoteData = {
+      titleText,
+      contentText,
+      GUID: timestamp,
+      charactersCount,
+    };
     allNotesData.push(newNoteData);
     localStorage.setItem("allNotesData", JSON.stringify(allNotesData));
     dispatch(setTitleText(""));

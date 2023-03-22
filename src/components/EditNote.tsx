@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
 import {
@@ -21,6 +20,7 @@ const EditNote = () => {
   const handleGoHome = () => {
     dispatch(setTitleText(""));
     dispatch(setContentText(""));
+    dispatch(setCharactersCount(0));
     navigate("/");
   };
 
@@ -29,8 +29,9 @@ const EditNote = () => {
   };
 
   const handleContentextChange = (event: any) => {
+    const charactersCountWithoutSpaces = event.target.value.replace(/\s+/g, "");
     dispatch(setContentText(event.target.value));
-    dispatch(setCharactersCount(event.target.value.length));
+    dispatch(setCharactersCount(charactersCountWithoutSpaces.length));
   };
 
   const handleSave = () => {
@@ -44,16 +45,9 @@ const EditNote = () => {
   const editNoteData = {
     titleText: storedData.titleText,
     contentText: storedData.contentText,
-    timestamp: storedData.timestamp,
+    timestamp: storedData.GUID,
     charactersCount: storedData.charactersCount,
   };
-
-  useEffect(() => {
-    console.log(storedData.titleText);
-    console.log(storedData.contentText);
-    console.log(storedData.timestamp?.toString());
-    console.log(storedData.charactersCount);
-  }, [storedData.titleText, storedData.contentText, storedData.timestamp, storedData.charactersCount])
 
   return (
     <>
