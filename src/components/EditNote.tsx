@@ -1,21 +1,31 @@
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   setCharactersCount,
   setContentText,
-  setTimestamp,
   setTitleText,
-} from "../redux/components/AddNote/action";
+  setUpdateNote,
+} from "../redux/components/EditNote/action";
 
 import NoteEditor from "../views/NoteEditor";
+import { useEffect } from "react";
 
 const EditNote = () => {
   const dispatch: any = useDispatch();
+  const { titleText, contentText, charactersCount, updateNote } = useSelector(
+    (state: any) => state.editNoteReducers
+  );
 
   const navigate = useNavigate();
   const location = useLocation();
   const storedData = location.state.storedData;
+
+  useEffect(() => {
+    dispatch(setTitleText(storedData.titleText));
+    dispatch(setContentText(storedData.contentText));
+    dispatch(setCharactersCount(storedData.charactersCount));
+  }, []);
 
   const handleGoHome = () => {
     dispatch(setTitleText(""));
@@ -35,18 +45,29 @@ const EditNote = () => {
   };
 
   const handleSave = () => {
-    dispatch(setTitleText(""));
-    dispatch(setContentText(""));
-    dispatch(setTimestamp(""));
-    dispatch(setCharactersCount(0));
+    const updatedData = {
+      titleText: titleText,
+      contentText: contentText,
+      timestamp: storedData.GUID,
+      charactersCount: charactersCount,
+    };
+
+    localStorage.setItem(storedData.GUID, JSON.stringify(updatedData));
+    dispatch(setUpdateNote(updatedData));
+
     navigate("/");
   };
 
   const editNoteData = {
-    titleText: storedData.titleText,
-    contentText: storedData.contentText,
+    // titleText: titleText,
+    // contentText: contentText,
+    // timestamp: storedData.GUID,
+    // charactersCount: charactersCount,
+
+    titleText: updateNote.updateNote?.titleText || titleText,
+    contentText: updateNote.updateNote?.contentText || contentText,
     timestamp: storedData.GUID,
-    charactersCount: storedData.charactersCount,
+    charactersCount: updateNote.updateNote?.charactersCount || charactersCount,
   };
 
   return (
