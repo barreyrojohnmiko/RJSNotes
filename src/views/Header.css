@@ -11,11 +11,18 @@
   top: -100%;
 }
 
-.header-container {
+.header-main-container {
   display: flex;
   flex-direction: column;
   padding: 25px;
   background: #0a1930;
+}
+
+.header-sub-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .header-label {
@@ -25,6 +32,17 @@
   font-size: 25px;
   color: #ccd6f6;
   margin-bottom: 10px;
+}
+
+.export-logo-container {
+  border: none;
+  background-color: transparent;
+}
+
+.export-logo {
+  height: 23px;
+  width: 23px;
+  color: #ccd6f6;
 }
 
 .search-bar-container {

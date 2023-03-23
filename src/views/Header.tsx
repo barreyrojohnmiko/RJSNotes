@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import "./Header.css";
 
-import { faMagnifyingGlass, faX } from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlass, faX, faFileExport } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -53,10 +53,30 @@ const Header = () => {
     dispatch(setFilteredNotes(filteredNotes));
   }, [searchText, dispatch]);
 
+  const exportLocalStorage = () => {
+    const allNotesData = localStorage.getItem("allNotesData");
+    if (allNotesData !== null) {
+      const jsonData = JSON.stringify(JSON.parse(allNotesData));
+      const dataBlob = new Blob([jsonData], { type: "application/json" });
+      const url = URL.createObjectURL(dataBlob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "localStorageData.json";
+      link.click();
+    } else {
+      alert("No data found in local storage.");
+    }
+  };
+
   return (
     <header className={`header ${isHeaderVisible ? "header--visible" : "header--hidden"}`}>
-      <div className="header-container">
-        <div className="header-label">Notes</div>
+      <div className="header-main-container">
+        <div className="header-sub-container">
+          <div className="header-label">Notes</div>
+          <button className="export-logo-container" onClick={exportLocalStorage}>
+            <FontAwesomeIcon icon={faFileExport} className="export-logo"/>
+          </button>
+        </div>
         <div className="search-bar-container">
           <FontAwesomeIcon icon={faMagnifyingGlass} className="search-bar-logo"/>
           <input
