@@ -49,7 +49,7 @@ const Header = () => {
 
   useEffect(() => {
     const allNotesData = JSON.parse(localStorage.getItem("allNotesData") || "[]");
-    const filteredNotes = allNotesData.filter((note: any) => note.titleText.toLowerCase().startsWith(searchText.toLowerCase()));
+    const filteredNotes = allNotesData.filter((note: any) => note.titleText.toLowerCase().includes(searchText.toLowerCase()) || note.contentText.toLowerCase().includes(searchText.toLowerCase()));
     dispatch(setFilteredNotes(filteredNotes));
   }, [searchText, dispatch]);
 
