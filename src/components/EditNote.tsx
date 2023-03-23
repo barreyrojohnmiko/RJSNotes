@@ -59,15 +59,10 @@ const EditNote = () => {
   };
 
   const editNoteData = {
-    // titleText: titleText,
-    // contentText: contentText,
-    // timestamp: storedData.GUID,
-    // charactersCount: charactersCount,
-
-    titleText: updateNote.updateNote?.titleText || titleText,
-    contentText: updateNote.updateNote?.contentText || contentText,
+    titleText: updateNote?.updateNote?.titleText ?? titleText,
+    contentText: updateNote?.updateNote?.contentText ?? contentText,
     timestamp: storedData.GUID,
-    charactersCount: updateNote.updateNote?.charactersCount || charactersCount,
+    charactersCount: updateNote?.updateNote?.charactersCount ?? charactersCount,
   };
 
   return (
