@@ -4,11 +4,17 @@ import "./AddButton.css";
 import { faFileCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import { useDispatch } from "react-redux";
+import { setModeStatus } from "../redux/components/Home/action";
+
 const AddButton = () => {
   const navigate = useNavigate();
 
+  const dispatch: any = useDispatch();
+
   const handleAddNote = () => {
     navigate("add-note");
+    dispatch(setModeStatus("add"));
   };
 
   return (

@@ -1,10 +1,12 @@
 import "./NoteEditor.css";
 
-import {faArrowLeftLong, faCheck, faTrash} from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeftLong, faCheck, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TextareaAutosize from 'react-textarea-autosize';
 
 import NoteEditorObject from "../objects/interface/NoteEditorObject";
+
+import { useSelector } from "react-redux";
 
 const formatDate = (timestamp: string) => {
   const date = new Date(timestamp);
@@ -15,8 +17,10 @@ const formatDate = (timestamp: string) => {
 };
 
 const NoteEditor = (props: NoteEditorObject) => {
-  return (
-    <div className="note-editor-main-container">
+  const { modeStatus } = useSelector((state: any) => state.homeReducers);
+
+  const renderAddModeHeader = () => {
+    return (
       <div className="note-editor-header">
         <div className="note-editor-content-container">
           <button className="header-button-container" onClick={props.handleGoHome}>
@@ -29,6 +33,34 @@ const NoteEditor = (props: NoteEditorObject) => {
           ) : null}
         </div>
       </div>
+    )
+  }
+
+  const renderEditModeHeader = () => {
+    return (
+      <div className="note-editor-header">
+        <div className="note-editor-content-container">
+          <button className="header-button-container" onClick={props.handleGoHome}>
+            <FontAwesomeIcon icon={faArrowLeftLong} className="header-button-logo"/>
+          </button>
+          <div className="header-button-right-container">
+            <button className="header-button-container" onClick={props.handleGoHome}>
+              <FontAwesomeIcon icon={faTrash} className="header-button-logo"/>
+            </button>
+            {props.titleText !== "" || props.contentText !== "" ? (
+              <button className="header-button-container" onClick={props.handleSave}>
+                <FontAwesomeIcon icon={faCheck} className="header-button-logo" />
+              </button>
+            ) : null}
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="note-editor-main-container">
+      {modeStatus === "add" ? renderAddModeHeader() : renderEditModeHeader()}
 
       <div className="note-editor-body">
         <div className="note-editor-details-font">

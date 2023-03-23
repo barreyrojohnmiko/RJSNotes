@@ -16,6 +16,12 @@
   background: transparent;
 }
 
+.header-button-right-container {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
 .header-button-logo {
   height: 25px;
   width: 25px;
