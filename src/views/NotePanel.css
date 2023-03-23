@@ -17,6 +17,12 @@
   font-size: 18px;
   color: #ccd6f6;
   margin-bottom: 5px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
 }
 
 .note-panel-content {
