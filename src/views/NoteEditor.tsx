@@ -22,7 +22,6 @@ const NoteEditor = (props: NoteEditorObject) => {
           <button className="header-button-container" onClick={props.handleGoHome}>
             <FontAwesomeIcon icon={faArrowLeftLong} className="header-button-logo"/>
           </button>
-
           {props.titleText !== "" || props.contentText !== "" ? (
             <button className="header-button-container" onClick={props.handleSave}>
               <FontAwesomeIcon icon={faCheck} className="header-button-logo" />
