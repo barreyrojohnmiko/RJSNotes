@@ -86,6 +86,8 @@ const EditNote = () => {
     const allNotesData = JSON.parse(localStorage.getItem("allNotesData") || "[]");
     const filteredNotes = allNotesData.filter((noteData: any) => noteData.GUID !== storedData.GUID);
     localStorage.setItem("allNotesData", JSON.stringify(filteredNotes));
+    
+    clearStates();
     navigate("/");
   };
 
