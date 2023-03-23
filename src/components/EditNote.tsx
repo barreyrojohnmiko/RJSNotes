@@ -82,6 +82,13 @@ const EditNote = () => {
     navigate("/");
   };
 
+  const handleDelete = () => {
+    const allNotesData = JSON.parse(localStorage.getItem("allNotesData") || "[]");
+    const filteredNotes = allNotesData.filter((noteData: any) => noteData.GUID !== storedData.GUID);
+    localStorage.setItem("allNotesData", JSON.stringify(filteredNotes));
+    navigate("/");
+  };
+
   const editNoteData = {
     titleText: updateNote?.updateNote?.titleText ?? titleText,
     contentText: updateNote?.updateNote?.contentText ?? contentText,
@@ -94,6 +101,7 @@ const EditNote = () => {
       <NoteEditor
         {...editNoteData}
         handleGoHome={handleGoHome}
+        handleDelete={handleDelete}
         handleSave={handleSave}
         handleTitleTextChange={handleTitleTextChange}
         handleContentextChange={handleContentextChange}

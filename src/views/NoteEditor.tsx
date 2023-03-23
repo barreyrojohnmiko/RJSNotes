@@ -44,7 +44,7 @@ const NoteEditor = (props: NoteEditorObject) => {
             <FontAwesomeIcon icon={faArrowLeftLong} className="header-button-logo"/>
           </button>
           <div className="header-button-right-container">
-            <button className="header-button-container" onClick={props.handleGoHome}>
+            <button className="header-button-container" onClick={props.handleDelete}>
               <FontAwesomeIcon icon={faTrash} className="header-button-logo"/>
             </button>
             {props.titleText !== "" || props.contentText !== "" ? (

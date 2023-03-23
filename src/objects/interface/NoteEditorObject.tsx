@@ -5,6 +5,7 @@ interface NoteEditorObject {
   charactersCount: number;
   handleGoHome: () => void,
   handleSave: () => void,
+  handleDelete?: () => void,
   handleTitleTextChange: (event: any) => void,
   handleContentextChange: (event: any) => void,
 }
