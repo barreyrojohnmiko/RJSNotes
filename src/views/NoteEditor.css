@@ -17,13 +17,13 @@
 }
 
 .header-button-logo {
-  height: 20px;
-  width: 20px;
+  height: 25px;
+  width: 25px;
   color: #ccd6f6;
 }
 
 .note-editor-body {
-  padding: 60px 25px 0 25px;
+  padding: 80px 25px 0 25px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -82,7 +82,7 @@
 .note-editor-text-area {
   background: none;
   border: none;
-  
+
   height: auto;
-  overflow-y: scroll;
+  overflow-y: hidden;
 }
