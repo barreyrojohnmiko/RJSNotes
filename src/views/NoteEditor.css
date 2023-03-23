@@ -19,7 +19,7 @@
 .header-button-right-container {
   display: flex;
   flex-direction: row;
-  gap: 10px;
+  gap: 10px; 
 }
 
 .header-button-logo {
