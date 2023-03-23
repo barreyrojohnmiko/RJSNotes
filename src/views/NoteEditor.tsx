@@ -2,6 +2,7 @@ import "./NoteEditor.css";
 
 import { faArrowLeftLong, faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import TextareaAutosize from 'react-textarea-autosize';
 
 import NoteEditorObject from "../objects/interface/NoteEditorObject";
 
@@ -18,20 +19,11 @@ const NoteEditor = (props: NoteEditorObject) => {
     <div className="note-editor-main-container">
       <div className="note-editor-header">
         <div className="note-editor-content-container">
-          <button
-            className="header-button-container"
-            onClick={props.handleGoHome}
-          >
-            <FontAwesomeIcon
-              icon={faArrowLeftLong}
-              className="header-button-logo"
-            />
+          <button className="header-button-container" onClick={props.handleGoHome}>
+            <FontAwesomeIcon icon={faArrowLeftLong} className="header-button-logo"/>
           </button>
           {props.titleText !== "" || props.contentText !== "" ? (
-            <button
-              className="header-button-container"
-              onClick={props.handleSave}
-            >
+            <button className="header-button-container" onClick={props.handleSave}>
               <FontAwesomeIcon icon={faCheck} className="header-button-logo" />
             </button>
           ) : null}
@@ -40,16 +32,16 @@ const NoteEditor = (props: NoteEditorObject) => {
 
       <div className="note-editor-body">
         <div className="note-editor-details-font">
-          Date Created: {formatDate(props.timestamp)} | {props.charactersCount}{" "}
-          characters
+          Date Created: {formatDate(props.timestamp)} | {props.charactersCount} characters
         </div>
-        <textarea
+        <input
+          type="text"
           className="note-editor-title-font-settings note-editor-text-area"
           placeholder="Title"
           value={props.titleText}
           onChange={props.handleTitleTextChange}
         />
-        <textarea
+        <TextareaAutosize
           className="note-editor-content-font-settings note-editor-text-area"
           placeholder="Start typing"
           value={props.contentText}

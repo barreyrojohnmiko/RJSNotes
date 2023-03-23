@@ -82,9 +82,7 @@
 .note-editor-text-area {
   background: none;
   border: none;
-
+  
   height: auto;
-  min-height: 50px;
-  max-height: 300px;
   overflow-y: scroll;
 }
