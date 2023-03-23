@@ -5,6 +5,7 @@ import {
   setCharactersCount,
   setContentText,
   setTitleText,
+  setTimestamp,
   setUpdateNote,
 } from "../redux/components/EditNote/action";
 
@@ -27,6 +28,14 @@ const EditNote = () => {
     dispatch(setCharactersCount(storedData.charactersCount));
   }, []);
 
+  const clearStates = () => {
+    dispatch(setTitleText(""));
+    dispatch(setContentText(""));
+    dispatch(setTimestamp(""));
+    dispatch(setCharactersCount(0));
+    dispatch(setUpdateNote(""));
+  };
+
   const handleGoHome = () => {
     dispatch(setTitleText(""));
     dispatch(setContentText(""));
@@ -48,13 +57,28 @@ const EditNote = () => {
     const updatedData = {
       titleText: titleText,
       contentText: contentText,
-      timestamp: storedData.GUID,
+      GUID: storedData.GUID,
       charactersCount: charactersCount,
     };
 
-    localStorage.setItem(storedData.GUID, JSON.stringify(updatedData));
-    dispatch(setUpdateNote(updatedData));
+    // Get the existing notes data from localStorage
+    const allNotesData = JSON.parse(
+      localStorage.getItem("allNotesData") || "[]"
+    );
 
+    // Find the index of the note data to update based on the GUID value
+    const noteIndex = allNotesData.findIndex(
+      (noteData: any) => noteData.GUID === storedData.GUID
+    );
+
+    if (noteIndex !== -1) {
+      // If the note data exists, update it
+      allNotesData[noteIndex] = updatedData;
+      localStorage.setItem("allNotesData", JSON.stringify(allNotesData));
+      dispatch(setUpdateNote(updatedData));
+    }
+
+    clearStates();
     navigate("/");
   };
 

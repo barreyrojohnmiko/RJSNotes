@@ -19,11 +19,15 @@ const AddNote = () => {
 
   const navigate = useNavigate();
 
-  const handleGoHome = () => {
+  const clearStates = () => {
     dispatch(setTitleText(""));
     dispatch(setContentText(""));
     dispatch(setTimestamp(""));
     dispatch(setCharactersCount(0));
+  };
+
+  const handleGoHome = () => {
+    clearStates();
     localStorage.removeItem("titleText");
     localStorage.removeItem("contentText");
     localStorage.removeItem("GUID");
@@ -54,10 +58,8 @@ const AddNote = () => {
     };
     allNotesData.push(newNoteData);
     localStorage.setItem("allNotesData", JSON.stringify(allNotesData));
-    dispatch(setTitleText(""));
-    dispatch(setContentText(""));
-    dispatch(setTimestamp(""));
-    dispatch(setCharactersCount(0));
+
+    clearStates();
     navigate("/");
   };
 
