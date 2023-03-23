@@ -26,15 +26,6 @@ const AddNote = () => {
     dispatch(setCharactersCount(0));
   };
 
-  const handleGoHome = () => {
-    clearStates();
-    localStorage.removeItem("titleText");
-    localStorage.removeItem("contentText");
-    localStorage.removeItem("GUID");
-    localStorage.removeItem("charactersCount");
-    navigate("/");
-  };
-
   const handleTitleTextChange = (event: any) => {
     dispatch(setTitleText(event.target.value));
   };
@@ -87,7 +78,7 @@ const AddNote = () => {
     <>
       <NoteEditor
         {...addNoteData}
-        handleGoHome={handleGoHome}
+        handleGoHome={handleSave}
         handleSave={handleSave}
         handleTitleTextChange={handleTitleTextChange}
         handleContentextChange={handleContentextChange}
