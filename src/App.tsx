@@ -1,9 +1,9 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 
-import AddNote from "./components/AddNote";
-import EditNote from "./components/EditNote";
-import Home from "./components/Home";
+import AddNote from "./components/addNote/AddNote";
+import EditNote from "./components/editNote/EditNote";
+import Home from "./components/home/Home";
 
 const App = () => {
   return (

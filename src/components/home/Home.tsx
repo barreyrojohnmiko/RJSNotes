@@ -1,8 +1,8 @@
 import "./Home.css";
 
-import AddButton from "../views/AddButton";
-import Header from "../views/Header";
-import Note from "./Note";
+import AddButton from "../../views/AddButton";
+import Header from "../../views/Header";
+import Note from "../note/Note";
 
 const Home = () => {
   return (

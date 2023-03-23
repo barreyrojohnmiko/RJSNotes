@@ -7,9 +7,9 @@ import {
   setContentText,
   setTimestamp,
   setTitleText,
-} from "../redux/components/AddNote/action";
+} from "../../redux/components/addNote/action";
 
-import NoteEditor from "../views/NoteEditor";
+import NoteEditor from "../../views/NoteEditor";
 
 const AddNote = () => {
   const dispatch: any = useDispatch();
