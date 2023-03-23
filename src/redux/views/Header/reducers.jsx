@@ -3,6 +3,7 @@ import {
   SET_IS_SEARCH_TEXT_CLEARED,
   SET_IS_HEADER_VISIBLE,
   SET_PREV_SCROLL_POS,
+  SET_FILTERED_NOTES
 } from "./action";
 
 const initialState = {
@@ -10,6 +11,7 @@ const initialState = {
   isSearchTextCleared: true,
   isHeaderVisible: true,
   prevScrollPos: 0,
+  filteredNotes: [],
 };
 
 const headerReducers = (state = initialState, action) => {
@@ -22,6 +24,8 @@ const headerReducers = (state = initialState, action) => {
       return { ...state, isHeaderVisible: action.payload };
     case SET_PREV_SCROLL_POS:
       return { ...state, prevScrollPos: action.payload };
+    case SET_FILTERED_NOTES:
+      return { ...state, filteredNotes: action.payload };
     default:
       return state;
   }

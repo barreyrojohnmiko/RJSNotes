@@ -3,10 +3,13 @@ import { useNavigate } from "react-router-dom";
 
 import NotePanel from "../views/NotePanel";
 
+import { useSelector } from "react-redux";
+
 const Note = () => {
   const navigate = useNavigate();
   const storedDataString = localStorage.getItem("allNotesData");
-  const storedData = storedDataString ? JSON.parse(storedDataString) : null;
+
+  const { filteredNotes } = useSelector((state: any) => state.headerReducers);
 
   const doOpenEditor = (data: any) => {
     navigate("edit-note", { state: { storedData: data } });
@@ -15,7 +18,7 @@ const Note = () => {
   return (
     <div className="note-main-container">
       <div className="note-flex-container">
-        {storedData && storedData.map((data: any, index: number) => (
+        {filteredNotes.map((data: any, index: number) => (
           <div key={index} className="note-panel-container" onClick={() => doOpenEditor(data)}>
             <NotePanel storedData={data} />
           </div>

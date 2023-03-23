@@ -2,6 +2,7 @@ export const SET_SEARCH_TEXT = "SET_SEARCH_TEXT";
 export const SET_IS_SEARCH_TEXT_CLEARED = "SET_IS_SEARCH_TEXT_CLEARED";
 export const SET_IS_HEADER_VISIBLE = "SET_IS_HEADER_VISIBLE";
 export const SET_PREV_SCROLL_POS = "SET_PREV_SCROLL_POS";
+export const SET_FILTERED_NOTES = "SET_FILTERED_NOTES";
 
 export const setSearchText = (searchText) => (dispatch) => {
   dispatch({
@@ -28,5 +29,12 @@ export const setPrevScrollPos = (prevScrollPos) => (dispatch) => {
   dispatch({
     type: SET_PREV_SCROLL_POS,
     payload: prevScrollPos,
+  });
+};
+
+export const setFilteredNotes = (filteredNotes) => (dispatch) => {
+  dispatch({
+    type: SET_FILTERED_NOTES,
+    payload: filteredNotes,
   });
 };

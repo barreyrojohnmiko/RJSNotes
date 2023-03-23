@@ -5,7 +5,7 @@ import { faMagnifyingGlass, faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { useDispatch, useSelector } from "react-redux";
-import { setIsHeaderVisible, setIsSearchTextCleared, setPrevScrollPos, setSearchText } from "../redux/views/Header/action";
+import { setIsHeaderVisible, setIsSearchTextCleared, setPrevScrollPos, setSearchText, setFilteredNotes } from "../redux/views/Header/action";
 
 const Header = () => {
   const dispatch: any = useDispatch();
@@ -46,6 +46,12 @@ const Header = () => {
       noteSection.style.paddingTop = `${isHeaderVisible ? "140px" : "45px"}`;
     }
   }, [isHeaderVisible]);
+
+  useEffect(() => {
+    const allNotesData = JSON.parse(localStorage.getItem("allNotesData") || "[]");
+    const filteredNotes = allNotesData.filter((note: any) => note.titleText.toLowerCase().startsWith(searchText.toLowerCase()));
+    dispatch(setFilteredNotes(filteredNotes));
+  }, [searchText, dispatch]);
 
   return (
     <header className={`header ${isHeaderVisible ? "header--visible" : "header--hidden"}`}>
