@@ -63,6 +63,7 @@
   font-style: normal;
   font-weight: 300;
   font-size: 14px;
+  line-height: 25px;
 }
 
 .note-editor-content-font-settings::placeholder {
