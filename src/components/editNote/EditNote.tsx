@@ -43,6 +43,20 @@ const EditNote = () => {
     navigate("/");
   };
 
+  useEffect(() => {
+    const handleKeyDown = (event: any) => {
+      if (event.key === "Escape") {
+        handleGoHome();
+      }
+    };
+  
+    document.addEventListener("keydown", handleKeyDown);
+  
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
   const handleTitleTextChange = (event: any) => {
     dispatch(setTitleText(event.target.value));
   };
