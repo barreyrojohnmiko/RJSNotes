@@ -1,6 +1,6 @@
 import "./NoteEditor.css";
 
-import { faArrowLeftLong, faCheck, faTrash } from "@fortawesome/free-solid-svg-icons";
+import {faArrowLeftLong, faCheck, faTrash} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TextareaAutosize from 'react-textarea-autosize';
 
