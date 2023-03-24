@@ -3,7 +3,8 @@ import {
   SET_IS_SEARCH_TEXT_CLEARED,
   SET_IS_HEADER_VISIBLE,
   SET_PREV_SCROLL_POS,
-  SET_FILTERED_NOTES
+  SET_FILTERED_NOTES,
+  SET_IS_ELLIPSIS_CLICKED
 } from "./action";
 
 const initialState = {
@@ -12,6 +13,7 @@ const initialState = {
   isHeaderVisible: true,
   prevScrollPos: 0,
   filteredNotes: [],
+  isEllipsisClicked: false,
 };
 
 const headerReducers = (state = initialState, action) => {
@@ -26,6 +28,8 @@ const headerReducers = (state = initialState, action) => {
       return { ...state, prevScrollPos: action.payload };
     case SET_FILTERED_NOTES:
       return { ...state, filteredNotes: action.payload };
+    case SET_IS_ELLIPSIS_CLICKED:
+      return { ...state, isEllipsisClicked: action.payload };
     default:
       return state;
   }

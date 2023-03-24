@@ -1,15 +1,34 @@
 import { useEffect } from "react";
 import "./Header.css";
 
-import { faMagnifyingGlass, faX, faFileExport, faEllipsisH } from "@fortawesome/free-solid-svg-icons";
+import {
+  faMagnifyingGlass,
+  faX,
+  faFileExport,
+  faEllipsisH,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import SettingsModal from "../settingsModal/SettingsModal";
 
 import { useDispatch, useSelector } from "react-redux";
-import { setIsHeaderVisible, setIsSearchTextCleared, setPrevScrollPos, setSearchText, setFilteredNotes } from "../../redux/views/header/action";
+import {
+  setIsHeaderVisible,
+  setIsSearchTextCleared,
+  setPrevScrollPos,
+  setSearchText,
+  setFilteredNotes,
+  setIsEllipsisClicked,
+} from "../../redux/views/header/action";
 
 const Header = () => {
   const dispatch: any = useDispatch();
-  const { searchText, isSearchTextCleared, isHeaderVisible, prevScrollPos } = useSelector((state: any) => state.headerReducers);
+  const {
+    searchText,
+    isSearchTextCleared,
+    isHeaderVisible,
+    prevScrollPos,
+    isEllipsisClicked,
+  } = useSelector((state: any) => state.headerReducers);
 
   const handleSearchTextChange = (event: any) => {
     dispatch(setSearchText(event.target.value));
@@ -53,6 +72,10 @@ const Header = () => {
     dispatch(setFilteredNotes(filteredNotes));
   }, [searchText, dispatch]);
 
+  const toggleEllipsis = () => {
+    dispatch(setIsEllipsisClicked(!isEllipsisClicked));
+  }
+
   const exportLocalStorage = () => {
     const allNotesData = localStorage.getItem("allNotesData");
     if (allNotesData !== null) {
@@ -68,14 +91,23 @@ const Header = () => {
     }
   };
 
+  const importLocalStorage = () => {
+  };
+
   return (
     <header className={`header ${isHeaderVisible ? "header--visible" : "header--hidden"}`}>
       <div className="header-main-container">
         <div className="header-sub-container">
           <div className="header-label">Notes</div>
-          <button className="export-logo-container" onClick={exportLocalStorage}>
+          <button className="export-logo-container" onClick={toggleEllipsis}>
             <FontAwesomeIcon icon={faEllipsisH} className="export-logo"/>
           </button>
+        </div>
+        <div className="settings-modal-section">
+          <SettingsModal
+            exportLocalStorage={exportLocalStorage}
+            importLocalStorage={importLocalStorage}
+          />
         </div>
         <div className="search-bar-container">
           <FontAwesomeIcon icon={faMagnifyingGlass} className="search-bar-logo"/>

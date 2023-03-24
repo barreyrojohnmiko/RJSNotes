@@ -3,6 +3,7 @@ export const SET_IS_SEARCH_TEXT_CLEARED = "SET_IS_SEARCH_TEXT_CLEARED";
 export const SET_IS_HEADER_VISIBLE = "SET_IS_HEADER_VISIBLE";
 export const SET_PREV_SCROLL_POS = "SET_PREV_SCROLL_POS";
 export const SET_FILTERED_NOTES = "SET_FILTERED_NOTES";
+export const SET_IS_ELLIPSIS_CLICKED = "SET_IS_ELLIPSIS_CLICKED";
 
 export const setSearchText = (searchText) => (dispatch) => {
   dispatch({
@@ -36,5 +37,12 @@ export const setFilteredNotes = (filteredNotes) => (dispatch) => {
   dispatch({
     type: SET_FILTERED_NOTES,
     payload: filteredNotes,
+  });
+};
+
+export const setIsEllipsisClicked = (isEllipsisClicked) => (dispatch) => {
+  dispatch({
+    type: SET_IS_ELLIPSIS_CLICKED,
+    payload: isEllipsisClicked,
   });
 };
