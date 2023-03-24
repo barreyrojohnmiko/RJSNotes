@@ -14,7 +14,7 @@
 .header-main-container {
   display: flex;
   flex-direction: column;
-  padding: 25px;
+  padding: 20px;
   background: #0a1930;
 }
 
@@ -29,9 +29,9 @@
   font-family: "Poppins", sans-serif;
   font-style: normal;
   font-weight: 500;
-  font-size: 25px;
+  font-size: 24px;
   color: #ccd6f6;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .export-logo-container {
@@ -40,8 +40,8 @@
 }
 
 .export-logo {
-  height: 23px;
-  width: 23px;
+  height: 24px;
+  width: 24px;
   color: #ccd6f6;
 }
 
@@ -56,8 +56,8 @@
 }
 
 .search-bar-logo {
-  height: 15px;
-  width: 15px;
+  height: 18px;
+  width: 18px;
   color: #ccd6f6;
 }
 
@@ -72,8 +72,8 @@
 .search-bar-font-settings {
   font-family: "Poppins", sans-serif;
   font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
+  font-weight: 600;
+  font-size: 16px;
 }
 
 .search-bar-text-field::placeholder {
