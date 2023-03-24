@@ -1,4 +1,4 @@
-interface NotePanelObject {
+interface NotePanelDto {
   storedData: {
     titleText: string;
     contentText: string;
@@ -6,4 +6,4 @@ interface NotePanelObject {
   };
 }
 
-export default NotePanelObject;
+export default NotePanelDto;

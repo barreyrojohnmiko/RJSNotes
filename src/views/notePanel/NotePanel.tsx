@@ -1,9 +1,9 @@
 import React from "react";
 import "./NotePanel.css";
 
-import NotePanelObject from "../../objects/interface/NotePanelObject";
+import NotePanelDto from "../../objects/dto/NotePanelDto";
 
-const NotePanel: React.FC<NotePanelObject> = ({ storedData }) => {
+const NotePanel: React.FC<NotePanelDto> = ({ storedData }) => {
   return (
     <div className="note-panel-main-container">
       <div className="note-panel-sub-container">
