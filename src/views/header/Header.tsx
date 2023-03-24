@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./Header.css";
 
 import {
@@ -92,6 +92,30 @@ const Header = () => {
   };
 
   const importLocalStorage = () => {
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = '.json';
+    fileInput.onchange = (e) => {
+      const selectedFile = (e.target as HTMLInputElement)?.files?.[0];
+
+      if (selectedFile && selectedFile.name.endsWith('.json')) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          try {
+            const data = JSON.parse(reader.result as string);
+            localStorage.setItem('allNotesData', JSON.stringify(data));
+            alert('File uploaded successfully!');
+            window.location.reload();
+          } catch (error) {
+            alert('Invalid JSON file!');
+          }
+        };
+        reader.readAsText(selectedFile);
+      } else {
+        alert('Please select a valid .json file!');
+      }
+    };
+    fileInput.click();
   };
 
   return (
