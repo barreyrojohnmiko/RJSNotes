@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import "./Header.css";
 
-import { faMagnifyingGlass, faX, faFileExport } from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlass, faX, faFileExport, faEllipsisH } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { useDispatch, useSelector } from "react-redux";
-import { setIsHeaderVisible, setIsSearchTextCleared, setPrevScrollPos, setSearchText, setFilteredNotes } from "../redux/views/header/action";
+import { setIsHeaderVisible, setIsSearchTextCleared, setPrevScrollPos, setSearchText, setFilteredNotes } from "../../redux/views/header/action";
 
 const Header = () => {
   const dispatch: any = useDispatch();
@@ -74,7 +74,7 @@ const Header = () => {
         <div className="header-sub-container">
           <div className="header-label">Notes</div>
           <button className="export-logo-container" onClick={exportLocalStorage}>
-            <FontAwesomeIcon icon={faFileExport} className="export-logo"/>
+            <FontAwesomeIcon icon={faEllipsisH} className="export-logo"/>
           </button>
         </div>
         <div className="search-bar-container">

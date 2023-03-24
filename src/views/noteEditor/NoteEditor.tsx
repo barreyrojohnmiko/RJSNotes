@@ -4,7 +4,7 @@ import { faArrowLeftLong, faCheck, faTrash } from "@fortawesome/free-solid-svg-i
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TextareaAutosize from 'react-textarea-autosize';
 
-import NoteEditorObject from "../objects/interface/NoteEditorObject";
+import NoteEditorObject from "../../objects/interface/NoteEditorObject";
 
 import { useSelector } from "react-redux";
 

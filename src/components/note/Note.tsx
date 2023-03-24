@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import "./Note.css";
 
-import NotePanel from "../../views/NotePanel";
+import NotePanel from "../../views/notePanel/NotePanel";
 
 import { useDispatch, useSelector } from "react-redux";
 import { setModeStatus } from "../../redux/components/home/action";

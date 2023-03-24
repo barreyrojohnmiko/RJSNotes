@@ -9,7 +9,7 @@ import {
   setUpdateNote,
 } from "../../redux/components/editNote/action";
 
-import NoteEditor from "../../views/NoteEditor";
+import NoteEditor from "../../views/noteEditor/NoteEditor";
 import { useEffect } from "react";
 
 const EditNote = () => {

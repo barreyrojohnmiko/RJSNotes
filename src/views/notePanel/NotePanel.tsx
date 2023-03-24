@@ -1,7 +1,7 @@
 import React from "react";
 import "./NotePanel.css";
 
-import NotePanelObject from "../objects/interface/NotePanelObject";
+import NotePanelObject from "../../objects/interface/NotePanelObject";
 
 const NotePanel: React.FC<NotePanelObject> = ({ storedData }) => {
   return (

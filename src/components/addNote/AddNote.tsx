@@ -9,7 +9,7 @@ import {
   setTitleText,
 } from "../../redux/components/addNote/action";
 
-import NoteEditor from "../../views/NoteEditor";
+import NoteEditor from "../../views/noteEditor/NoteEditor";
 
 const AddNote = () => {
   const dispatch: any = useDispatch();
