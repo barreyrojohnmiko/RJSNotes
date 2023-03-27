@@ -5,8 +5,7 @@
 
 .note-flex-container {
   display: grid;
-  /* grid-template-columns: repeat(5, 1fr); */
-  grid-template-columns: repeat(5, 20%);
+  grid-template-columns: repeat(5, 1fr);
 }
 
 .note-panel-container {
@@ -16,7 +15,6 @@
 
 @media screen and (min-width: 0px) and (max-width: 1023px) {
   .note-flex-container {
-    /* grid-template-columns: repeat(2, 1fr); */
-    grid-template-columns: repeat(2, 50%);
+    grid-template-columns: repeat(2, 1fr);
   }
 }
