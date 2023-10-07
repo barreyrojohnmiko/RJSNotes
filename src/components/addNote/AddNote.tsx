@@ -7,7 +7,7 @@ import {
   setContentText,
   setTimestamp,
   setTitleText,
-} from "../../redux/components/addNote/action";
+} from "../../redux/components/AddNote/action";
 
 import NoteEditor from "../../views/noteEditor/NoteEditor";
 

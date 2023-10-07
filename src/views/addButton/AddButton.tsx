@@ -5,7 +5,7 @@ import { faFileCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { useDispatch } from "react-redux";
-import { setModeStatus } from "../../redux/components/home/action";
+import { setModeStatus } from "../../redux/components/Home/action";
 
 const AddButton = () => {
   const navigate = useNavigate();

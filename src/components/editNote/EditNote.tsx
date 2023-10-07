@@ -7,7 +7,7 @@ import {
   setTitleText,
   setTimestamp,
   setUpdateNote,
-} from "../../redux/components/editNote/action";
+} from "../../redux/components/EditNote/action";
 
 import NoteEditor from "../../views/noteEditor/NoteEditor";
 import { useEffect } from "react";

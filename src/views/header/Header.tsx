@@ -18,7 +18,7 @@ import {
   setSearchText,
   setFilteredNotes,
   setIsEllipsisClicked,
-} from "../../redux/views/header/action";
+} from "../../redux/views/Header/action";
 
 const Header = () => {
   const dispatch: any = useDispatch();

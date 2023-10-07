@@ -5,8 +5,8 @@ import "./Note.css";
 import NotePanel from "../../views/notePanel/NotePanel";
 
 import { useDispatch, useSelector } from "react-redux";
-import { setModeStatus } from "../../redux/components/home/action";
-import { setTimestamp } from "../../redux/components/addNote/action";
+import { setModeStatus } from "../../redux/components/Home/action";
+import { setTimestamp } from "../../redux/components/AddNote/action";
 
 const Note = () => {
   const navigate = useNavigate();
