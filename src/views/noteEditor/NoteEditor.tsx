@@ -1,8 +1,8 @@
 import "./NoteEditor.css";
 
-import { faArrowLeftLong, faCheck, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import TextareaAutosize from 'react-textarea-autosize';
+import TextareaAutosize from "react-textarea-autosize";
 
 import NoteEditorObject from "../../objects/interface/NoteEditorObject";
 
@@ -23,40 +23,72 @@ const NoteEditor = (props: NoteEditorObject) => {
     return (
       <div className="note-editor-header">
         <div className="note-editor-content-container">
-          <button className="header-button-container" onClick={props.handleGoHome}>
-            <FontAwesomeIcon icon={faArrowLeftLong} className="header-button-logo"/>
+          <button
+            className="header-button-container"
+            onClick={() => {
+              props.handleSave("back");
+            }}
+          >
+            <div className="header-button-back-logo">
+              <div className="left-button"> &lt; </div>
+              <div className="right-button"> Notes </div>
+            </div>
           </button>
           {props.titleText !== "" || props.contentText !== "" ? (
-            <button className="header-button-container" onClick={props.handleSave}>
-              <FontAwesomeIcon icon={faCheck} className="header-button-logo" />
+            <button
+              className="header-button-container"
+              onClick={() => {
+                props.handleSave("done");
+              }}
+            >
+              <div className="header-button-text"> Done </div>
             </button>
           ) : null}
         </div>
       </div>
-    )
-  }
+    );
+  };
 
   const renderEditModeHeader = () => {
     return (
       <div className="note-editor-header">
         <div className="note-editor-content-container">
-          <button className="header-button-container" onClick={props.handleGoHome}>
-            <FontAwesomeIcon icon={faArrowLeftLong} className="header-button-logo"/>
+          <button
+            className="header-button-container"
+            onClick={() => {
+              props.handleSave("back");
+            }}
+          >
+            <div className="header-button-back-logo">
+              <div className="left-button"> &lt; </div>
+              <div className="right-button"> Notes </div>
+            </div>
           </button>
-          <div className="header-button-right-container">
-            <button className="header-button-container" onClick={props.handleDelete}>
-              <FontAwesomeIcon icon={faTrash} className="header-button-logo"/>
-            </button>
-            {props.titleText !== "" || props.contentText !== "" ? (
-              <button className="header-button-container" onClick={props.handleSave}>
-                <FontAwesomeIcon icon={faCheck} className="header-button-logo" />
+          {props.titleText !== "" || props.contentText !== "" ? (
+            <div className="header-button-right-container">
+              <button
+                className="header-button-container"
+                onClick={props.handleDelete}
+              >
+                <FontAwesomeIcon
+                  icon={faTrash}
+                  className="header-button-logo"
+                />
               </button>
-            ) : null}
-          </div>
+              <button
+                className="header-button-container"
+                onClick={() => {
+                  props.handleSave("done");
+                }}
+              >
+                <div className="header-button-text"> Done </div>
+              </button>
+            </div>
+          ) : null}
         </div>
       </div>
-    )
-  }
+    );
+  };
 
   return (
     <div className="note-editor-main-container">
@@ -64,7 +96,8 @@ const NoteEditor = (props: NoteEditorObject) => {
 
       <div className="note-editor-body">
         <div className="note-editor-details-font">
-          Date Created: {formatDate(props.timestamp)} | {props.charactersCount} characters
+          Date Created: {formatDate(props.timestamp)} | {props.charactersCount}{" "}
+          characters
         </div>
         <input
           type="text"

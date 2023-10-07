@@ -41,9 +41,9 @@ const AddNote = () => {
         handleGoHome();
       }
     };
-  
+
     document.addEventListener("keydown", handleKeyDown);
-  
+
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
@@ -59,7 +59,7 @@ const AddNote = () => {
     dispatch(setCharactersCount(charactersCountWithoutSpaces.length));
   };
 
-  const handleSave = () => {
+  const handleSave = (mode: string) => {
     const allNotesDataString = localStorage.getItem("allNotesData");
     const allNotesData = allNotesDataString
       ? JSON.parse(allNotesDataString)
@@ -70,8 +70,11 @@ const AddNote = () => {
       GUID: timestamp,
       charactersCount,
     };
-    allNotesData.push(newNoteData);
-    localStorage.setItem("allNotesData", JSON.stringify(allNotesData));
+
+    if (titleText !== "" || contentText !== "") {
+      allNotesData.push(newNoteData);
+      localStorage.setItem("allNotesData", JSON.stringify(allNotesData));
+    }
 
     clearStates();
     navigate("/");

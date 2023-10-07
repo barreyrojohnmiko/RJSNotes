@@ -4,7 +4,7 @@ interface NoteEditorObject {
   timestamp: string;
   charactersCount: number;
   handleGoHome: () => void,
-  handleSave: () => void,
+  handleSave: (mode: string) => void,
   handleDelete?: () => void,
   handleTitleTextChange: (event: any) => void,
   handleContentextChange: (event: any) => void,

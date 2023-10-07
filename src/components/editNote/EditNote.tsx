@@ -1,16 +1,17 @@
+import { useEffect } from "react";
+
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
   setCharactersCount,
   setContentText,
-  setTitleText,
   setTimestamp,
+  setTitleText,
   setUpdateNote,
 } from "../../redux/components/EditNote/action";
 
 import NoteEditor from "../../views/noteEditor/NoteEditor";
-import { useEffect } from "react";
 
 const EditNote = () => {
   const dispatch: any = useDispatch();
@@ -49,9 +50,9 @@ const EditNote = () => {
         handleGoHome();
       }
     };
-  
+
     document.addEventListener("keydown", handleKeyDown);
-  
+
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
@@ -67,7 +68,7 @@ const EditNote = () => {
     dispatch(setCharactersCount(charactersCountWithoutSpaces.length));
   };
 
-  const handleSave = () => {
+  const handleSave = (mode: string) => {
     const updatedData = {
       titleText: titleText,
       contentText: contentText,
@@ -85,22 +86,32 @@ const EditNote = () => {
       (noteData: any) => noteData.GUID === storedData.GUID
     );
 
-    if (noteIndex !== -1) {
-      // If the note data exists, update it
-      allNotesData[noteIndex] = updatedData;
-      localStorage.setItem("allNotesData", JSON.stringify(allNotesData));
-      dispatch(setUpdateNote(updatedData));
+    if (titleText !== "" || contentText !== "") {
+      if (noteIndex !== -1) {
+        // If the note data exists, update it
+        allNotesData[noteIndex] = updatedData;
+        localStorage.setItem("allNotesData", JSON.stringify(allNotesData));
+        dispatch(setUpdateNote(updatedData));
+      }
+    } else {
+      handleDelete();
     }
 
-    clearStates();
-    navigate("/");
+    if (mode === "back") {
+      clearStates();
+      navigate("/");
+    }
   };
 
   const handleDelete = () => {
-    const allNotesData = JSON.parse(localStorage.getItem("allNotesData") || "[]");
-    const filteredNotes = allNotesData.filter((noteData: any) => noteData.GUID !== storedData.GUID);
+    const allNotesData = JSON.parse(
+      localStorage.getItem("allNotesData") || "[]"
+    );
+    const filteredNotes = allNotesData.filter(
+      (noteData: any) => noteData.GUID !== storedData.GUID
+    );
     localStorage.setItem("allNotesData", JSON.stringify(filteredNotes));
-    
+
     clearStates();
     navigate("/");
   };

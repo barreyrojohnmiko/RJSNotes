@@ -8,7 +8,7 @@
   flex-direction: row;
   justify-content: space-between;
   background: #0a1930;
-  padding: 25px;
+  padding: 15px 25px 0 25px;
 }
 
 .header-button-container {
@@ -16,19 +16,69 @@
   background: transparent;
 }
 
+.header-button-container:hover {
+  color: #d68c45;
+}
+
+.header-button-text {
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  color: #ccd6f6;
+}
+
+.header-button-text:hover {
+  color: #d68c45;
+}
+
 .header-button-right-container {
   display: flex;
   flex-direction: row;
-  gap: 10px; 
+  gap: 10px;
 }
 
 .header-button-logo {
   height: 24px;
   width: 24px;
   color: #ccd6f6;
+
+  display: flex;
+  flex-direction: row;
+}
+.header-button-logo:hover {
+  color: #d68c45;
+}
+
+.header-button-back-logo {
+  color: #ccd6f6;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 3px;
+}
+
+.header-button-back-logo:hover {
+  color: #d68c45;
+}
+
+.header-button-back-logo .left-button {
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 40px;
+  margin-top: 4px;
+}
+
+.header-button-back-logo .right-button {
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
 }
 
 .note-editor-body {
+  margin: 0 30px;
   padding: 85px 25px 0 25px;
   display: flex;
   flex-direction: column;
