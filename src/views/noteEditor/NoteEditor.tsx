@@ -38,7 +38,7 @@ const NoteEditor = (props: NoteEditorObject) => {
             <button
               className="header-button-container"
               onClick={() => {
-                props.handleSave("done");
+                props.handleSave("save");
               }}
             >
               <div className="header-button-text"> Done </div>
@@ -78,10 +78,10 @@ const NoteEditor = (props: NoteEditorObject) => {
               <button
                 className="header-button-container"
                 onClick={() => {
-                  props.handleSave("done");
+                  props.handleSave("save");
                 }}
               >
-                <div className="header-button-text"> Done </div>
+                <div className="header-button-text"> Save </div>
               </button>
             </div>
           ) : null}
