@@ -41,7 +41,7 @@ const NoteEditor = (props: NoteEditorObject) => {
                 props.handleSave("save");
               }}
             >
-              <div className="header-button-text"> Done </div>
+              <div className="header-button-text"> Save </div>
             </button>
           ) : null}
         </div>

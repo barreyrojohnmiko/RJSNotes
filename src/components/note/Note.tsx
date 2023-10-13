@@ -47,6 +47,7 @@ const Note = () => {
             contentText: "Welcome!\n\nPlease use the add note button located at the bottom right of the screen to start adding notes.\n\nIf notes are already existing, you can just import the .JSON file using the three-dots buttons at upper right part of the screen.",
             GUID: timestamp,
             charactersCount: 0,
+            isPinned: false,
           };
           defaultNote.charactersCount = defaultNote.contentText.replace(/\s+/g, "").length;
           localStorage.setItem("allNotesData", JSON.stringify([defaultNote]));
@@ -58,6 +59,7 @@ const Note = () => {
           contentText: "Welcome!\n\nPlease use the add note button located at the bottom right of the screen to start adding notes.\n\nIf notes are already existing, you can just import the .JSON file using the three-dots buttons at upper right part of the screen.",
           GUID: timestamp,
           charactersCount: 0,
+          isPinned: false,
         };
         defaultNote.charactersCount = defaultNote.contentText.replace(/\s+/g, "").length;
         localStorage.setItem("allNotesData", JSON.stringify([defaultNote]));

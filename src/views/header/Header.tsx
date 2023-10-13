@@ -1,23 +1,22 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import "./Header.css";
 
 import {
-  faMagnifyingGlass,
-  faX,
-  faFileExport,
   faEllipsisH,
+  faMagnifyingGlass,
+  faX
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SettingsModal from "../settingsModal/SettingsModal";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
+  setFilteredNotes,
+  setIsEllipsisClicked,
   setIsHeaderVisible,
   setIsSearchTextCleared,
   setPrevScrollPos,
   setSearchText,
-  setFilteredNotes,
-  setIsEllipsisClicked,
 } from "../../redux/views/Header/action";
 
 const Header = () => {
@@ -27,6 +26,7 @@ const Header = () => {
     isSearchTextCleared,
     isHeaderVisible,
     prevScrollPos,
+    filteredNotes,
     isEllipsisClicked,
   } = useSelector((state: any) => state.headerReducers);
 
@@ -51,7 +51,11 @@ const Header = () => {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollPos = window.pageYOffset;
-      dispatch(setIsHeaderVisible(prevScrollPos > currentScrollPos || currentScrollPos < 10));
+      dispatch(
+        setIsHeaderVisible(
+          prevScrollPos > currentScrollPos || currentScrollPos < 10
+        )
+      );
       dispatch(setPrevScrollPos(currentScrollPos));
     };
 
@@ -67,14 +71,33 @@ const Header = () => {
   }, [isHeaderVisible]);
 
   useEffect(() => {
-    const allNotesData = JSON.parse(localStorage.getItem("allNotesData") || "[]");
-    const filteredNotes = allNotesData.filter((note: any) => note.titleText.toLowerCase().includes(searchText.toLowerCase()) || note.contentText.toLowerCase().includes(searchText.toLowerCase()));
+    const allNotesData = JSON.parse(
+      localStorage.getItem("allNotesData") || "[]"
+    );
+
+    const modifiedNotes = allNotesData.map((note: any) => ({
+      ...note,
+      isPinned: note.isPinned !== undefined ? note.isPinned : false,
+    }));
+
+    const filteredNotes = modifiedNotes.filter(
+      (note: any) =>
+        note.titleText.toLowerCase().includes(searchText.toLowerCase()) ||
+        note.contentText.toLowerCase().includes(searchText.toLowerCase())
+    );
+
+    localStorage.setItem("allNotesData", JSON.stringify(modifiedNotes));
+
     dispatch(setFilteredNotes(filteredNotes));
   }, [searchText, dispatch]);
 
+  useEffect(() => {
+    console.log("filteredNotes: ", filteredNotes);
+  }, [filteredNotes]);
+
   const toggleEllipsis = () => {
     dispatch(setIsEllipsisClicked(!isEllipsisClicked));
-  }
+  };
 
   const exportLocalStorage = () => {
     const allNotesData = localStorage.getItem("allNotesData");
@@ -92,39 +115,43 @@ const Header = () => {
   };
 
   const importLocalStorage = () => {
-    const fileInput = document.createElement('input');
-    fileInput.type = 'file';
-    fileInput.accept = '.json';
+    const fileInput = document.createElement("input");
+    fileInput.type = "file";
+    fileInput.accept = ".json";
     fileInput.onchange = (e) => {
       const selectedFile = (e.target as HTMLInputElement)?.files?.[0];
 
-      if (selectedFile && selectedFile.name.endsWith('.json')) {
+      if (selectedFile && selectedFile.name.endsWith(".json")) {
         const reader = new FileReader();
         reader.onload = () => {
           try {
             const data = JSON.parse(reader.result as string);
-            localStorage.setItem('allNotesData', JSON.stringify(data));
-            alert('File uploaded successfully!');
+            localStorage.setItem("allNotesData", JSON.stringify(data));
+            alert("File uploaded successfully!");
             window.location.reload();
           } catch (error) {
-            alert('Invalid JSON file!');
+            alert("Invalid JSON file!");
           }
         };
         reader.readAsText(selectedFile);
       } else {
-        alert('Please select a valid .json file!');
+        alert("Please select a valid .json file!");
       }
     };
     fileInput.click();
   };
 
   return (
-    <header className={`header ${isHeaderVisible ? "header--visible" : "header--hidden"}`}>
+    <header
+      className={`header ${
+        isHeaderVisible ? "header--visible" : "header--hidden"
+      }`}
+    >
       <div className="header-main-container">
         <div className="header-sub-container">
           <div className="header-label">Notes</div>
           <button className="export-logo-container" onClick={toggleEllipsis}>
-            <FontAwesomeIcon icon={faEllipsisH} className="export-logo"/>
+            <FontAwesomeIcon icon={faEllipsisH} className="export-logo" />
           </button>
         </div>
         <div className="settings-modal-section">
@@ -134,7 +161,10 @@ const Header = () => {
           />
         </div>
         <div className="search-bar-container">
-          <FontAwesomeIcon icon={faMagnifyingGlass} className="search-bar-logo"/>
+          <FontAwesomeIcon
+            icon={faMagnifyingGlass}
+            className="search-bar-logo"
+          />
           <input
             type="text"
             className="search-bar-text-field search-bar-font-settings"
@@ -144,8 +174,14 @@ const Header = () => {
           />
 
           {isSearchTextCleared ? null : (
-            <button className="search-bar-remove-text-button-container" onClick={clearSearchText}>
-              <FontAwesomeIcon icon={faX} className="search-bar-remove-text-button"/>
+            <button
+              className="search-bar-remove-text-button-container"
+              onClick={clearSearchText}
+            >
+              <FontAwesomeIcon
+                icon={faX}
+                className="search-bar-remove-text-button"
+              />
             </button>
           )}
         </div>

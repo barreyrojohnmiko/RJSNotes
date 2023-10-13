@@ -69,6 +69,7 @@ const AddNote = () => {
       contentText,
       GUID: timestamp,
       charactersCount,
+      isPinned: false,
     };
 
     if (titleText !== "" || contentText !== "") {
