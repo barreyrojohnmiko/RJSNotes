@@ -84,7 +84,7 @@ const NoteEditor = (props: NoteEditorObject) => {
                 className="header-button-container"
                 onClick={props.handlePin}
               >
-                <div className="header-button-text"> Pin </div>
+                <div className="header-button-text"> {props.isPinned ? 'Unpin' : 'Pin' } </div>
               </button>
               <button
                 className="header-button-container"

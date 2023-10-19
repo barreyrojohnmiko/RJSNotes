@@ -4,7 +4,7 @@ import "./Header.css";
 import {
   faEllipsisH,
   faMagnifyingGlass,
-  faX
+  faX,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SettingsModal from "../settingsModal/SettingsModal";
@@ -84,6 +84,10 @@ const Header = () => {
       (note: any) =>
         note.titleText.toLowerCase().includes(searchText.toLowerCase()) ||
         note.contentText.toLowerCase().includes(searchText.toLowerCase())
+    );
+
+    filteredNotes.sort((a: any, b: any) =>
+      a.isPinned === b.isPinned ? 0 : a.isPinned ? -1 : 1
     );
 
     localStorage.setItem("allNotesData", JSON.stringify(modifiedNotes));

@@ -39,6 +39,7 @@ const Note = () => {
   useEffect(() => {
     if (timestamp) {
       const allNotesData = localStorage.getItem("allNotesData");
+      
       if (allNotesData) {
         const parsedNotesData = JSON.parse(allNotesData);
         if (parsedNotesData === null) {

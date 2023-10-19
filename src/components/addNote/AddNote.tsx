@@ -96,10 +96,6 @@ const AddNote = () => {
     }
   }, [timestamp, dispatch]);
 
-  const handlePin = () => {
-    dispatch(setIsPinned(!isPinned));
-  }
-
   const addNoteData = {
     titleText: titleText,
     contentText: contentText,
@@ -116,7 +112,6 @@ const AddNote = () => {
         handleSave={handleSave}
         handleTitleTextChange={handleTitleTextChange}
         handleContentextChange={handleContentextChange}
-        handlePin={handlePin}
       />
     </>
   );
