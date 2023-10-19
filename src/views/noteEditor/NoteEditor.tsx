@@ -7,6 +7,7 @@ import TextareaAutosize from "react-textarea-autosize";
 import NoteEditorObject from "../../objects/interface/NoteEditorObject";
 
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const formatDate = (timestamp: string) => {
   const date = new Date(timestamp);
@@ -18,6 +19,10 @@ const formatDate = (timestamp: string) => {
 
 const NoteEditor = (props: NoteEditorObject) => {
   const { modeStatus } = useSelector((state: any) => state.homeReducers);
+
+  useEffect(() => {
+    console.log('props.isPinned: ', props.isPinned)
+  }, [props.isPinned])
 
   const renderAddModeHeader = () => {
     return (
@@ -74,6 +79,12 @@ const NoteEditor = (props: NoteEditorObject) => {
                   icon={faTrash}
                   className="header-button-logo"
                 />
+              </button>
+              <button
+                className="header-button-container"
+                onClick={props.handlePin}
+              >
+                <div className="header-button-text"> Pin </div>
               </button>
               <button
                 className="header-button-container"

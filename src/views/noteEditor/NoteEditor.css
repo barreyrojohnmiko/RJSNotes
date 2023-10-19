@@ -35,7 +35,7 @@
 .header-button-right-container {
   display: flex;
   flex-direction: row;
-  gap: 10px;
+  gap: 20px;
 }
 
 .header-button-logo {

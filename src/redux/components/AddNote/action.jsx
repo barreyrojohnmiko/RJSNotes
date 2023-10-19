@@ -2,6 +2,7 @@ export const SET_TITLE_TEXT = "SET_TITLE_TEXT";
 export const SET_CONTENT_TEXT = "SET_CONTENT_TEXT";
 export const SET_TIMESTAMP = "SET_TIMESTAMP";
 export const SET_CHARACTERS_COUNT = "SET_CHARACTERS_COUNT";
+export const SET_IS_PINNED = "SET_IS_PINNED";
 
 export const setTitleText = (titleText) => (dispatch) => {
   dispatch({
@@ -28,5 +29,12 @@ export const setCharactersCount = (charactersCount) => (dispatch) => {
   dispatch({
     type: SET_CHARACTERS_COUNT,
     payload: charactersCount,
+  });
+};
+
+export const setIsPinned = (isPinned) => (dispatch) => {
+  dispatch({
+    type: SET_IS_PINNED,
+    payload: isPinned,
   });
 };

@@ -7,13 +7,14 @@ import {
   setContentText,
   setTimestamp,
   setTitleText,
+  setIsPinned,
 } from "../../redux/components/AddNote/action";
 
 import NoteEditor from "../../views/noteEditor/NoteEditor";
 
 const AddNote = () => {
   const dispatch: any = useDispatch();
-  const { titleText, contentText, timestamp, charactersCount } = useSelector(
+  const { titleText, contentText, timestamp, charactersCount, isPinned } = useSelector(
     (state: any) => state.addNoteReducers
   );
 
@@ -24,6 +25,7 @@ const AddNote = () => {
     dispatch(setContentText(""));
     dispatch(setTimestamp(""));
     dispatch(setCharactersCount(0));
+    dispatch(setIsPinned(false));
   };
 
   const handleGoHome = () => {
@@ -94,11 +96,16 @@ const AddNote = () => {
     }
   }, [timestamp, dispatch]);
 
+  const handlePin = () => {
+    dispatch(setIsPinned(!isPinned));
+  }
+
   const addNoteData = {
     titleText: titleText,
     contentText: contentText,
     timestamp: timestamp,
     charactersCount: charactersCount,
+    isPinned: isPinned,
   };
 
   return (
@@ -109,6 +116,7 @@ const AddNote = () => {
         handleSave={handleSave}
         handleTitleTextChange={handleTitleTextChange}
         handleContentextChange={handleContentextChange}
+        handlePin={handlePin}
       />
     </>
   );

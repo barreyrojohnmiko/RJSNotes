@@ -9,15 +9,15 @@ import {
   setTimestamp,
   setTitleText,
   setUpdateNote,
+  setIsPinned,
 } from "../../redux/components/EditNote/action";
 
 import NoteEditor from "../../views/noteEditor/NoteEditor";
 
 const EditNote = () => {
   const dispatch: any = useDispatch();
-  const { titleText, contentText, charactersCount, updateNote } = useSelector(
-    (state: any) => state.editNoteReducers
-  );
+  const { titleText, contentText, charactersCount, updateNote, isPinned } =
+    useSelector((state: any) => state.editNoteReducers);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -27,6 +27,7 @@ const EditNote = () => {
     dispatch(setTitleText(storedData.titleText));
     dispatch(setContentText(storedData.contentText));
     dispatch(setCharactersCount(storedData.charactersCount));
+    dispatch(setIsPinned(storedData.isPinned));
   }, []);
 
   const clearStates = () => {
@@ -35,12 +36,11 @@ const EditNote = () => {
     dispatch(setTimestamp(""));
     dispatch(setCharactersCount(0));
     dispatch(setUpdateNote(""));
+    dispatch(setIsPinned(false));
   };
 
   const handleGoHome = () => {
-    dispatch(setTitleText(""));
-    dispatch(setContentText(""));
-    dispatch(setCharactersCount(0));
+    clearStates();
     navigate("/");
   };
 
@@ -74,6 +74,7 @@ const EditNote = () => {
       contentText: contentText,
       GUID: storedData.GUID,
       charactersCount: charactersCount,
+      isPinned: isPinned,
     };
 
     // Get the existing notes data from localStorage
@@ -116,11 +117,16 @@ const EditNote = () => {
     navigate("/");
   };
 
+  const handlePin = () => {
+    dispatch(setIsPinned(!isPinned));
+  }
+
   const editNoteData = {
     titleText: updateNote?.updateNote?.titleText ?? titleText,
     contentText: updateNote?.updateNote?.contentText ?? contentText,
     timestamp: storedData.GUID,
     charactersCount: updateNote?.updateNote?.charactersCount ?? charactersCount,
+    isPinned: updateNote?.updateNote?.isPinned ?? isPinned,
   };
 
   return (
@@ -132,6 +138,7 @@ const EditNote = () => {
         handleSave={handleSave}
         handleTitleTextChange={handleTitleTextChange}
         handleContentextChange={handleContentextChange}
+        handlePin={handlePin}
       />
     </>
   );

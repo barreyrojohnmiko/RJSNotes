@@ -3,6 +3,7 @@ import {
   SET_CONTENT_TEXT,
   SET_TIMESTAMP,
   SET_CHARACTERS_COUNT,
+  SET_IS_PINNED,
 } from "./action";
 
 const initialState = {
@@ -10,6 +11,7 @@ const initialState = {
   contentText: "",
   timestamp: null,
   charactersCount: 0,
+  isPinned: false,
 };
 
 const addNoteReducers = (state = initialState, action) => {
@@ -22,6 +24,8 @@ const addNoteReducers = (state = initialState, action) => {
       return { ...state, timestamp: action.payload };
     case SET_CHARACTERS_COUNT:
       return { ...state, charactersCount: action.payload };
+    case SET_IS_PINNED:
+      return { ...state, isPinned: action.payload };
     default:
       return state;
   }
